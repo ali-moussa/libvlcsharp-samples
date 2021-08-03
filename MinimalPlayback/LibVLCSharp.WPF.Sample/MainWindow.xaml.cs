@@ -23,9 +23,14 @@ namespace LibVLCSharp.WPF.Sample
             _libVLC = new LibVLC();
             _mediaPlayer = new MediaPlayer(_libVLC);
 
+            using (var media = new Media(_libVLC, new Uri("rtsp://192.168.60.101:554/jpeg")))
+            {
+                _mediaPlayer.Play(media);
+            }
+
             videoView.MediaPlayer = _mediaPlayer;
 
-            _mediaPlayer.Play(new Media(_libVLC, new Uri("http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4")));
+            //_mediaPlayer.Play(new Media(_libVLC, new Uri("http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4")));
         }
     }
 }
