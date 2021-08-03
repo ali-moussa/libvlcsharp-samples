@@ -50,13 +50,17 @@ namespace MediaElement
 
             LibVLC = new LibVLC();
 
-            var media = new Media(LibVLC,
-                new Uri("http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4"));
+            //var media = new Media(LibVLC,
+            //    new Uri("http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4"));
 
-            MediaPlayer = new MediaPlayer(media) { EnableHardwareDecoding = true };
-            media.Dispose();
+            MediaPlayer = new MediaPlayer(LibVLC);
 
-            MediaPlayer.Play();
+            using (var media = new Media(LibVLC, new Uri("rtsp://192.168.60.101:554/jpeg")))
+            {
+                MediaPlayer.Play(media);
+            }
+
+            //MediaPlayer.Play();
         }
 
         private void Set<T>(string propertyName, ref T field, T value)
